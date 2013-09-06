@@ -5,6 +5,7 @@ try{
   //{
   	 $script = dirname(__FILE__) . '/deploy.sh';
   	 mail('toxabes@gmail.com', 'Test', $script);
+  	 echo $script;
      exec($script);
   //}
 }catch(Exception $e){
