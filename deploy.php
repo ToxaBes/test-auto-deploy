@@ -1,17 +1,29 @@
 <?php
-$output = shell_exec('git pull origin master');
-echo "<pre>$output</pre>";
+//$output = shell_exec('git pull origin master');
+//echo "<pre>$output</pre>";
 
 try{
-  //$payload = json_decode($_REQUEST['payload']);
-  //if ($payload->ref === 'refs/heads/master')
-  //{
-  	 //$script = dirname(__FILE__) . '/deploy.sh';
-  	 //mail('toxabes@gmail.com', 'Test', $script);
-  	 //echo $script;
-     //exec($script);
-  //}
+  $commands = array(
+		'echo $PWD',
+		'whoami',
+		'git pull',
+		'git status',
+		'git submodule sync',
+		'git submodule update',
+		'git submodule status',
+	);
+ 
+	// Run the commands for output
+	$output = '';
+	foreach($commands AS $command){
+		// Run it
+		$tmp = shell_exec($command);
+		// Output
+		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
+		$output .= htmlentities(trim($tmp)) . "\n";
+	}
+	echo $output;
 }catch(Exception $e){
-    // echo $e->getMessage();
+    echo $e->getMessage();
 }
 ?>
